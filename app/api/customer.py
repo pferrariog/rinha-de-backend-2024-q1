@@ -1,8 +1,8 @@
 from typing import Union
 
+from app.schemas.customer_schemas import CustomerTransactionRequest
+from app.schemas.customer_schemas import CustomerTransactionResponse
 from fastapi import APIRouter
-from schemas.customer import CustomerTransactionRequest
-from schemas.customer import CustomerTransactionResponse
 
 
 route = APIRouter("/clientes")

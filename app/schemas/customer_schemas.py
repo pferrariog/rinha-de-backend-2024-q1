@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel
 from pydantic import validator
 
@@ -8,6 +10,7 @@ class CustomerTransactionRequest(BaseModel):
     valor: int
     tipo: str
     descricao: str
+    realizada: datetime = datetime.now()
 
     @validator("tipo")
     def _type_validator(cls, type) -> str:
@@ -22,3 +25,24 @@ class CustomerTransactionResponse(BaseModel):
 
     limite: int
     saldo: int
+
+
+class CustomerFinalTransactionResponse(BaseModel):
+    """Transaction response with datetime"""
+
+    realizada: datetime
+
+
+class CustomerBalanceInformation(BaseModel):
+    """Information about customer's account"""
+
+    total: int
+    data_extrato: datetime
+    limite: int
+
+
+class CustomerExtractResponse(BaseModel):
+    """Customer's extract full information"""
+
+    saldo: CustomerBalanceInformation
+    ultimas_transacoes: list[CustomerTransactionRequest]
